@@ -1,0 +1,96 @@
+<h2>{{ title }}</h2>
+<img src="{{ imageUrl }}" />
+<img [src]="imageUrl" />
+<!-- Two different ways of binding to an element -->
+
+<!-- Attribute Binding -->
+<!-- td in html is not in the DOM object apparently. If in doubt, add attr. to map html to the DOM -->
+<table>
+    <tr>
+        <td [attr.colspan]="colSpan">5</td>
+    </tr>
+</table>
+
+<!-- Bootstrap makes button looks nice, need to install dependency -->
+<!-- Importantly, boostrap.css was import from node modules into styles.css -->
+
+<!-- Class Binding -->
+<div>
+    <h2>Class Binding Button</h2>
+    <button class="btn btn-primary" [class.active]="isActive">Save</button>
+</div>
+<!-- class.active is an example of something that is only added based on a boolean
+     i.e. the class property appears in the html if true, and doesnt if false
+     recall that a class in html could be used to apply css styling for example,
+     so this kind of thing could be used to dynamically change appearance of this button -->
+
+<!-- Style binding -->
+<div>
+    <h2>Style Binding Button</h2>
+    <button class="btn btn-primary" [style.backgroundColor]= "isActive ? 'green' : 'red'">Stylish</button>
+</div>
+<!-- similar to above, one can bind styling directly in event this is just one simple style change -->
+
+<!-- Event Binding -->
+<!-- Note two methods are bound to this click, since event will "bubble" up to top level of the container -->
+<div (click)="onDivClick()">
+    <h2>Event Binding Button</h2>
+    <!-- This defines the event to occur on button click -->
+    <button class="btn btn-primary" (click)="onClick($event)"
+    [style.backgroundColor]= "isActive ? 'green' : 'red'">Clickable</button>
+</div>
+<!-- In this case, $event.stopPropagation() has been called, to stop bubbling and isolate event to the button method only -->
+<div (click)="onDivClick()">
+    <h2>Stop Propagation Binding Button</h2>
+    <!-- This defines the event to occur on button click -->
+    <button class="btn btn-primary" (click)="onClickNoBubbles($event)"
+    [style.backgroundColor]= "isActive ? 'green' : 'red'">ClickableNoBubbles</button>
+</div>
+
+<!-- Event Filtering -->
+<!-- Note that the keyup.enter is angular specific, vanilla javascript this is hard to do -->
+<div>
+    <h2>Event Filtering Input</h2>
+    <input (keyup.enter)="onKeyUp($event)" />
+    <p [style.display]= "isVisible ? 'block' : 'none'">{{ message }}</p>
+</div>
+
+<!-- Template Varibales -->
+<!-- Here is angular making life easier again. Instead of passing around properties on 
+     $event object, we can define this userMessage object catch to reduce verbosity -->
+<div>
+    <h2>Template Variable Angular Style</h2>
+    <input #userMessage (keyup.enter)="cleanerKeyUp(userMessage)" />
+    <p [style.display]= "isVisible ? 'block' : 'none'">{{ message2 }}</p>
+</div>
+
+<!-- Two Way Binding -->
+<!-- This is much simpler, directly two way binding to a class property -->
+<!-- MUST IMPORT FORMSMODULE IN APP.TS, Just import ngModel alone wont work -->
+<div>
+    <h2>Two Way Binding with ngModel</h2>
+    <!-- This is called bannana in a box syntax, used to signify two way binding -->
+    <input [(ngModel)]="message3" (keyup.enter)="twoWayKeyUp()" />
+    <p [style.display]= "isVisible ? 'block' : 'none'">{{ message3 }}</p>
+</div>
+
+<!-- Pipes! -->
+<div>
+    <h2>Pipes for Formatting Data</h2>
+    <!-- Uppercase pipe -->
+    <li>{{ course.title | uppercase }}</li>
+    <!-- Add comma pipe -->
+    <li>{{ course.students | number }} Students Take It</li>
+    <!-- Playinig around with number of decimals -->
+    <li>{{ course.rating | number: '1.2-2' }} Average Rating</li>
+    <!-- Money pipe -->
+    <li>${{ course.price | currency:'CDN':true:'2.2-2' }} is the cost</li>
+    <!-- Date pipe -->
+    <li>{{ course.releaseDate | date:'shortDate' }}</li>
+</div>
+
+<!-- Custom Pipe -->
+<div>
+    <h2>My Custom Pipe</h2>
+    <p> {{ longText | summary: 15 }}</p>
+</div>
