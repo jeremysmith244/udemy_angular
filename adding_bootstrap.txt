@@ -1,0 +1,4 @@
+npm install bootstrap@3.4.1 --save
+
+better:
+just add to package.json as a dependency, then run npm install

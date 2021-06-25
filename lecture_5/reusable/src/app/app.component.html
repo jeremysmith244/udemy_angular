@@ -1,0 +1,16 @@
+<div>
+  <img src="assets/kitten-510651.jpg" style="width:1000px;height:600px;"/>
+</div>
+
+<!-- Property binding is allowed due to Input property -->
+<!-- onfavoritechange is called because the change emitter is bound to onClick method -->
+<favorite [is-fav]="post.isFavorite" (change)="onFavoriteChange($event)"></favorite>
+<bootstrap-panel>
+  <div class="heading">Butt stuff</div>
+  <div class="body">
+    <h2>Ayyyo</h2>
+    <p>Talking bout stuff!</p>
+  </div>
+</bootstrap-panel>
+
+<like [num-likes]="likes.numLikes" (change)="onLikeChange($event)"></like>

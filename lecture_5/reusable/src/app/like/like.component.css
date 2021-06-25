@@ -1,0 +1,6 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+.glyphicon {
+    font-size: 100px;
+    color: darkgrey;
+    cursor: pointer;
+}
