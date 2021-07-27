@@ -1,8 +1,8 @@
 <div class="zippy">
-  <div (click)="toggle()" class="zippy__title">
+  <div (click)="toggle()" class="zippy-title">
     {{ visible ? "&#9650;" : "&#9660;" }} {{title}}
   </div>
-  <div [hidden]="!visible" class="zippy__content">
+  <div [hidden]="!visible" class="zippy-body">
     <ng-content></ng-content>
   </div>
 </div>

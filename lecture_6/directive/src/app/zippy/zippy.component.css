@@ -1,4 +1,19 @@
-.example-additional-selection {
-    opacity: 0.75;
-    font-size: 0.75em;
-  }
+
+.zippy { 
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+.zippy-title { 
+  font-weight: bold;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.zippy-body { 
+  padding: 20px;
+}
+
+.expanded { 
+  background: blue;
+}
