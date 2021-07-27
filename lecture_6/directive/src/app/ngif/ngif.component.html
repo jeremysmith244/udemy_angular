@@ -1,0 +1,46 @@
+<!-- Render this is there are course -->
+<div>
+    <h2>Old style ngIf</h2>
+    <div *ngIf="courses.length > 0">
+      List of courses
+      <ul>
+        <li *ngFor="let course of courses">{{ course }}</li>
+      </ul>
+    </div>
+    
+    <!-- Render this if there are no courses -->
+    <div *ngIf="courses.length == 0">
+      No courses available...
+    </div>
+  </div>
+  
+  <!-- Render this is there are course -->
+  <div>
+    <h2>Angular 4 if else</h2>
+    <div *ngIf="courses.length > 0; else noCourses">
+      List of courses
+      <ul>
+        <li *ngFor="let course of courses">{{ course }}</li>
+      </ul>
+    </div>
+    <ng-template #noCourses>
+      No courses available...
+    </ng-template>
+  </div>
+  <!-- This is not just hiding stuff, it just does not appear in the DOM -->
+  
+  <!-- Here is using property binding, to just hide it -->
+  <div>
+    <h2>Hidden attribute binding</h2>
+    <div [hidden]="courses.length == 0">
+      List of courses
+      <ul>
+        <li *ngFor="let course of courses">{{ course }}</li>
+      </ul>
+    </div>
+    <div [hidden] = "courses.length > 0">No courses available...</div>
+  </div>
+  
+  <!-- One approach is not better than other in all situations, think about what is slow
+       If one has to build a huge tree, only once, and user will hide/unhide, probably better to just hide
+       On other hand, if an element triggers lots of events, probably better not to include in DOM -->

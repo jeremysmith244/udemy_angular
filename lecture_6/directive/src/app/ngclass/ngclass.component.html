@@ -1,0 +1,15 @@
+<!-- Instead of building two different components and activating one or other, can use this ngclass -->
+<!-- This is an attribute directive, as it modifies DOM attributes -->
+<!-- Similarily, ngStyle can do something to modify a class -->
+<!-- But if you have lots of different styles, better to just make css classes and swithc between them -->
+<span 
+    class="glyphicon"
+    [ngClass]="{
+        'glyphicon-star': isFavorite,
+        'glyphicon-star-empty': !isFavorite
+    }"
+    [ngStyle]="{
+        'color': isFavorite ? 'green': 'blue'
+    }"
+    (click)="onClick()">
+</span>

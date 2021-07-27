@@ -1,0 +1,41 @@
+<h1>ngFor Examples</h1>
+<div>
+    <h1>Add a course and press ENTER!</h1>
+    <!-- See lecture 4 to see how this input binding works and other options -->
+    <!-- Point here is ngFor watches for this change in li below -->
+    <input #userCourse (keyup.enter)="addCourse(userCourse)" [appInputFormat]="'lowercase'">
+</div>
+<div>
+    <button (click)="loadCourses()">Load Courses</button>
+    <ul>
+        <!-- index and even are local variables of NgForOf directive template -->
+        <!-- trackBy will only update objects, if trackBy method returns true-->
+        <!-- ie, in this case we only update if it is a new id -->
+        <!-- Note the course?.name, this will prevent a crash even if a null is returned -->
+        <li *ngFor="let course of courses; index  as i; even as isEven; trackBy: trackCourse">
+            Index : {{ i }} : {{ course?.name }} <span *ngIf="isEven">(EVEN)</span>
+            <button (click)="onRemove(course)">Remove</button>
+        </li>
+    </ul>
+</div>
+
+<!-- How does all this template directive (*)  work?
+
+    Behind the hood,  angular is doing this property binding
+
+    <div *ngIf="courses.length > 0">
+            List of courses
+    </div>
+    
+
+    <ng-template [ngIf]="course.length > 0">
+        <div>
+            List of courses
+        </div>
+    </ng-template>
+        <ng-template [ngIf]="!(course.length > 0)">
+        <div>
+            List of courses
+        </div>
+    </ng-template>
+-->
