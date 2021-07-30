@@ -1,0 +1,82 @@
+<!-- #f is template variable, which would nromally reference the html element, i.e. <form #f> assign f to this html element -->
+    <!-- #f=ngForm, is a reference to the ngForm directive's output property, called NgSubmit -->
+    <!-- Recall   @Output('change') click = new EventEmitter(); for example, in lecture 5, Output properties are used to track events -->
+    <!-- We can (event) bind ngSubmit here because it is exposed by the template variable -->
+<form #f="ngForm" (ngSubmit)="submit(f)">
+    <!-- Move firstName in an out to see what this does -->
+    <!-- This will convert whats inside it into a nested json object -->
+    <div ngModelGroup="contact">
+        <div class="form-group">
+            <!-- Having for attribute match id below improves accessability, whatever tha means -->
+            <label for="firstName">First Name</label>
+            <input 
+                required 
+                minlength="3" 
+                maxlength="5" 
+                ngModel 
+                name="firstName" 
+                #firstName="ngModel" 
+                (change)="log(firstName)" 
+                id="firstName" 
+                type="text" 
+                class="form-control">
+            <div 
+                class="alert alert-danger" 
+                *ngIf="firstName.touched && firstName.errors ? firstName.errors.required : false">
+                First Name Required!
+            </div>
+            <div class="alert alert-danger" 
+                *ngIf="firstName.errors ? firstName.errors.minlength : false">
+                Please make your name {{ firstName.errors ? firstName.errors.minlength.requiredLength - firstName.errors.minlength.actualLength : 3 }} characters longer!
+            </div>
+        </div>
+    </div>
+    <div class="form-group" for="comment">
+        <label for="comment">Comment</label>
+        <textarea 
+            ngModel 
+            name="comment" 
+            #comment="ngModel" 
+            (change)="log(comment)" 
+            id="comment" 
+            cols="30" 
+            rows="10" 
+            class="form-control">
+        </textarea>
+    </div>
+    <div class="checkbox">
+        <label for="">
+            <input type="checkbox" ngModel name="isSubscribed">
+            Subscribe now homie
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="contactMethod">Contact Method</label>
+        <!-- You can use multiple alos on list, then you can highlight a few things -->
+        <select ngModel name="contactMethod" id="contactMethod" class="form-control">
+            <!-- Note that these options would be fetched from, and sent to a server -->
+            <option value=''></option>
+            <!-- Seen ngValue attribute binding. You could bind [value] to some string,
+            but it is often more convenient to just store objects for passing to servers. -->
+            <option 
+                *ngFor="let method of contactMethods" 
+                [ngValue]="method"
+                [value]="method.id">
+                {{ method.name }}
+            </option>
+        </select>
+    </div>
+    <!-- Radio buttons are little click on off buttons -->
+    <div *ngFor="let method of contactMethods" class="radio">
+        <label for="">
+            <input ngModel type="radio" name="contactMethod" [value]='method.id'>
+                {{ method.name }}
+        </label>
+    </div>
+    <!-- THIS IS AMAZING! Pipe form json object to this p, to view everything! -->
+    <p>
+        {{ f.value | json}}
+    </p>
+    <!-- This is very useful, disabling a button based on a valid template -->
+    <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+</form>

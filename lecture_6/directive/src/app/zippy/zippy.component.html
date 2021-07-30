@@ -1,5 +1,7 @@
 <div class="zippy">
-  <div (click)="toggle()" class="zippy-title">
+  <div (click)="toggle()" 
+        class="zippy-title"
+        [class.expanded]="visible">
     {{ visible ? "&#9650;" : "&#9660;" }} {{title}}
   </div>
   <div [hidden]="!visible" class="zippy-body">

@@ -1,0 +1,59 @@
+<!-- Build a form
+1. Form - Course Name, minimum 5 characters, or red
+2. Required dropdown called category, red if not there, multiple values
+3. Checkout box 30 day money back
+4. Put a <p> at bottom outputting json form
+5. Create button, the submit, disabled if not valid -->
+<br>
+<br>
+
+<form #f="ngForm">
+    <div class="form-group">
+        <label for="courseName">Course Name</label>
+        <input 
+            required
+            minlength="5"
+            ngModel
+            name="courseName"
+            #courseName="ngModel"
+            id="courseName"
+            type="text" 
+            class="form-control">
+    </div>
+    <div 
+        class="alert alert-danger"
+        *ngIf="!courseName.valid && courseName.touched">
+        Please enter a course name, must be at least 5 letters!
+    </div>
+    <div class="form-group">
+        <label for="category">Category</label>
+        <select
+            required 
+            ngModel
+            #category="ngModel" 
+            id="category" 
+            name="category" 
+            class="form-control">
+            <option 
+                *ngFor="let course of courseOptions"
+                [value]="course.id">
+                {{ course.name }}
+            </option>
+        </select>
+    </div>
+    <div 
+        class="alert alert-danger"
+        *ngIf="!category.valid && category.touched">
+        Please select a category!
+    </div>
+    <div class="checkbox">
+        <label for="">
+            <input type="checkbox" ngModel name="moneyBack">
+            30 days, little man, put that money, in my hand
+        </label>
+    </div>
+    <p>
+        {{ f.value | json }}
+    </p>
+    <button class="btn btn-primary" [disabled]="!f.valid">Create</button>
+</form>
