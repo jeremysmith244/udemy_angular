@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="login()">
+    <div *ngIf="form.errors" class="alert alert-danger">Form is invalid!</div>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+            formControlName="username"
+            id="username" 
+            type="text" 
+            class="form-control">
+        <div *ngIf="username?.pending">
+            <div class="loader"></div><p>Checking Uniqueness...</p>
+        </div>
+        <div *ngIf="checkUserNameMissing()" class="alert alert-danger">Username is required!</div>
+        <div *ngIf="checkUserNameShort()" class="alert alert-danger">Username must be at least {{ minLen }} letters!</div>
+        <div *ngIf="checkSpaces()" class="alert alert-danger">Username shall not contain spaces!</div>
+        <div *ngIf="checkUnique()" class="alert alert-danger">Username shall not be Jeremy!</div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+            formControlName="password"
+            id="password" 
+            type="text" 
+            class="form-control">
+            <div *ngIf="checkPassword()" class="alert alert-danger">Password is required.</div>
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>

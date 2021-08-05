@@ -1,0 +1,16 @@
+<h2>This is a FormArray</h2>
+<form [formGroup]="form">
+    <div fromArrayName=topics>
+        <input
+            type="text" class="form-control"
+            (keyup.enter)="addTopic(topic)" #topic>
+        <ul class="list-group">
+            <li 
+                *ngFor="let topic of topics.controls"
+                (click)="removeTopic(topic)"
+                class="list-group-item">
+                {{ topic.value }}
+            </li>
+        </ul>
+    </div>
+</form>
