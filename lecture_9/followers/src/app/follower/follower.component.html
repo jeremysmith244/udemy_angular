@@ -1,0 +1,24 @@
+<!-- <ul class="list-group">
+    <li 
+        *ngFor="let follower of followers"
+        class="list-group-item">
+        <button 
+            type="button" class="btn btn-primary"
+            (click) = "print(follower)"
+            >Print Information</button>
+            {{ follower["login"] }}
+    </li>
+</ul> -->
+
+<h1>Mosh's Followers</h1>
+<ul style="max-width: 300px;">
+    <li 
+        class="d-flex align-items-center"
+        *ngFor="let follower of followers">
+      <img [src]="follower['avatar_url']" class="img-thumbnail">
+      <div>
+        <h3 class="username">{{ follower['login'] }}</h3>
+        <a [href]="follower['repos_url']">{{ follower['repos_url'] }}</a>
+      </div>
+    </li>
+</ul>
