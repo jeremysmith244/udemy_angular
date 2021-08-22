@@ -1,0 +1,15 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+.img-thumbnail {
+    max-width: 30%;
+    height: auto;
+}
+
+.username {
+    font-weight: bolder;
+    color:rgb(9, 9, 105);
+}
+
+h1 {
+    padding-bottom: 2%;
+}
