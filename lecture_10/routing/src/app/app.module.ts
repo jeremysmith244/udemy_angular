@@ -34,7 +34,7 @@ import { PostComponent } from './posts/post.component';
         component: HomeComponent
       },
       { 
-        path: 'followers/follower/:username', 
+        path: 'followers/follower/:id/:username', 
         component: GithubProfileComponent
       },
       { 

@@ -18,7 +18,7 @@
       <img [src]="follower['avatar_url']" class="img-thumbnail">
       <div>
         <!-- BE CAREFUL PROPERTY BINDING SYNTAX DIFFERENT THAN ATTRIBUTE BINIDING -->
-        <h3 [routerLink]="['follower', follower['login']]" class="username">{{ follower['login'] }}</h3>
+        <h3 [routerLink]="['follower', follower['id'], follower['login']]" class="username">{{ follower['login'] }}</h3>
         <a>{{ follower['repos_url'] }}</a>
       </div>
     </li>

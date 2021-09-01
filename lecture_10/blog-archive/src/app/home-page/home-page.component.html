@@ -1,0 +1,10 @@
+<h1>Home Page</h1>
+<ul>
+    <li
+        class="bullet"
+        *ngFor="let date of dates"
+        [routerLink]="[date]"
+        >
+        {{ date }}
+    </li>
+</ul>
